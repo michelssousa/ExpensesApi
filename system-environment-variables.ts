@@ -1,8 +1,23 @@
+import * as dotenv from 'dotenv';
+import pino from "pino";
 
-export const environmentVariables = {
-  url: 'http://localhost',
-  bdUrl: 'http://localhost',
-  jwt_secret_key: 'michel',
-  tokenExpiresIn: 200000,
-  port: 8080
+dotenv.config();
+
+const config = process.env;
+
+export const environment_variable = {
+  App: {
+    port: config.port,
+    url: config.url,
+    bdUrl: config.bdUrl,
+  },
+  Auth: {
+    jwt_secret_key: config.jwt_secret_key,
+    tokenExpiresIn: config.tokenExpiresIn,
+  },
 }
+
+export const logger = pino({
+  enabled: true,
+  level: 'info',
+});
